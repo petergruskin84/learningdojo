@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aleph Dojo — Torah, Language & Movement</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --indigo:#1B1F3B;
+    --indigo-deep:#12152C;
+    --parchment:#F3ECDA;
+    --gold:#C9A227;
+    --charcoal:#24211D;
+    --rust:#7A2E2E;
+    --hairline:#DFD6BB;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Inter',sans-serif;
+    background:var(--parchment);
+    color:var(--charcoal);
+  }
+  a{color:inherit;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 40px;}
+  .eyebrow{
+    font-size:12px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    font-weight:600;
+    color:var(--gold);
+    margin:0 0 10px;
+  }
+  h1,h2,h3{
+    font-family:'Frank Ruhl Libre',serif;
+    font-weight:500;
+    margin:0;
+  }
+
+  header{
+    position:sticky;top:0;z-index:50;
+    background:var(--indigo);
+    color:var(--parchment);
+  }
+  .nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 40px;
+    max-width:1080px;margin:0 auto;
+  }
+  .logo{
+    font-family:'Frank Ruhl Libre',serif;
+    font-size:20px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .logo .aleph{color:var(--gold);font-size:24px;}
+  .navlinks{display:flex;gap:28px;font-size:14px;}
+  .navlinks a{text-decoration:none;opacity:0.85;}
+  .navlinks a:hover{opacity:1;}
+  .navcta{
+    border:1px solid var(--gold);
+    color:var(--gold);
+    font-size:13px;
+    padding:8px 16px;
+    text-decoration:none;
+    white-space:nowrap;
+  }
+
+  .hero{
+    background:var(--indigo);
+    color:var(--parchment);
+    position:relative;
+    overflow:hidden;
+    padding:70px 0 90px;
+  }
+  .hero-aleph{
+    position:absolute;
+    right:-40px;top:-40px;
+    font-family:'Frank Ruhl Libre',serif;
+    font-size:520px;
+    color:rgba(201,162,39,0.08);
+    line-height:1;
+    user-select:none;
+  }
+  .hero-inner{position:relative;max-width:600px;}
+  .hero h1{font-size:44px;line-height:1.18;margin-bottom:18px;}
+  .hero h1 span{color:var(--gold);}
+  .hero p{font-size:16px;line-height:1.6;color:#D8D3C0;max-width:480px;margin:0 0 30px;}
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn-gold{
+    background:var(--gold);
+    color:var(--indigo-deep);
+    font-weight:600;
+    font-size:14px;
+    padding:13px 22px;
+    text-decoration:none;
+    display:inline-block;
+  }
+  .btn-outline{
+    border:1px solid #6E7290;
+    color:var(--parchment);
+    font-size:14px;
+    padding:13px 22px;
+    text-decoration:none;
+    display:inline-block;
+  }
+
+  .strip{
+    background:var(--parchment);
+    border-bottom:1px solid var(--hairline);
+    padding:34px 0;
+  }
+  .strip .wrap{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:30px;
+  }
+  .strip-item{border-left:2px solid var(--gold);padding-left:16px;}
+  .strip-item h3{font-size:17px;margin-bottom:6px;}
+  .strip-item p{font-size:13.5px;line-height:1.55;color:#5C5646;margin:0;}
+
+  section{padding:66px 0;}
+  .section-head{max-width:560px;margin-bottom:38px;}
+  .section-head h2{font-size:30px;line-height:1.25;}
+  .section-head p{font-size:15px;color:#5C5646;line-height:1.6;margin-top:12px;}
+
+  .ranks{
+    background:var(--indigo-deep);
+    color:var(--parchment);
+  }
+  .ranks .section-head p{color:#B9B6C8;}
+  .rank-row{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    border-top:1px solid rgba(255,255,255,0.15);
+  }
+  .rank{
+    padding:26px 14px 20px;
+    text-align:center;
+    border-right:1px solid rgba(255,255,255,0.15);
+  }
+  .rank:last-child{border-right:none;}
+  .rank .letter{
+    font-family:'Frank Ruhl Libre',serif;
+    font-size:34px;
+    color:var(--gold);
+    margin-bottom:10px;
+  }
+  .rank .stage{font-size:13px;font-weight:600;margin-bottom:6px;}
+  .rank .desc{font-size:12px;color:#A9A6BC;line-height:1.5;}
+  .ranks-note{
+    font-size:13px;
+    color:#A9A6BC;
+    margin-top:22px;
+    max-width:640px;
+  }
+
+  .programs-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+  }
+  .card{
+    background:#FBF8EF;
+    border:1px solid var(--hairline);
+    padding:26px 26px 24px;
+  }
+  .card .tag{
+    font-size:11px;letter-spacing:0.1em;text-transform:uppercase;
+    color:var(--rust);font-weight:600;margin-bottom:10px;display:block;
+  }
+  .card h3{font-size:19px;margin-bottom:8px;}
+  .card p{font-size:14px;line-height:1.55;color:#5C5646;margin:0;}
+
+  .howitworks{background:#EDE4C8;}
+  .steps{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:26px;
+  }
+  .step{position:relative;padding-top:8px;}
+  .step .num{
+    font-family:'Frank Ruhl Libre',serif;
+    font-size:15px;
+    color:var(--gold);
+    border:1px solid var(--gold);
+    width:30px;height:30px;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:14px;
+  }
+  .step h3{font-size:16px;margin-bottom:8px;}
+  .step p{font-size:13.5px;line-height:1.55;color:#5C5646;margin:0;}
+
+  .about{
+    display:grid;
+    grid-template-columns:220px 1fr;
+    gap:36px;
+    align-items:start;
+  }
+  .about-photo{
+    width:220px;height:220px;
+    background:#DDD4B4;
+    border:1px solid var(--hairline);
+    display:flex;align-items:center;justify-content:center;
+    font-size:12px;color:#8A8264;
+    text-align:center;
+    padding:12px;
+  }
+  .about-text h2{font-size:26px;margin-bottom:12px;}
+  .about-text p{font-size:14.5px;line-height:1.65;color:#4A463A;margin:0 0 14px;}
+  .about-text .role{color:var(--rust);font-weight:600;font-size:13px;letter-spacing:0.05em;text-transform:uppercase;margin-bottom:10px;display:block;}
+
+  .contact{
+    background:var(--indigo);
+    color:var(--parchment);
+  }
+  .contact .section-head p{color:#B9B6C8;}
+  .contact-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:40px;
+  }
+  .audience-toggle{
+    display:flex;gap:10px;margin-bottom:22px;
+  }
+  .audience-toggle span{
+    border:1px solid #6E7290;
+    font-size:13px;
+    padding:8px 16px;
+  }
+  .audience-toggle span.active{
+    background:var(--gold);
+    border-color:var(--gold);
+    color:var(--indigo-deep);
+    font-weight:600;
+  }
+  form{display:flex;flex-direction:column;gap:12px;max-width:400px;}
+  input,textarea{
+    background:rgba(255,255,255,0.06);
+    border:1px solid #6E7290;
+    color:var(--parchment);
+    padding:11px 13px;
+    font-family:'Inter',sans-serif;
+    font-size:14px;
+  }
+  input::placeholder,textarea::placeholder{color:#9491A8;}
+  textarea{resize:vertical;min-height:80px;}
+  .submit{
+    background:var(--gold);
+    color:var(--indigo-deep);
+    border:none;
+    font-weight:600;
+    font-size:14px;
+    padding:12px 18px;
+    cursor:pointer;
+    margin-top:4px;
+  }
+  .contact-side p{font-size:14px;line-height:1.65;color:#D8D3C0;margin:0 0 16px;}
+  .contact-side .line{display:flex;gap:10px;font-size:14px;margin-bottom:10px;color:var(--parchment);}
+  .contact-side .line b{color:var(--gold);font-weight:600;}
+
+  footer{
+    background:var(--indigo-deep);
+    color:#8A87A0;
+    font-size:12.5px;
+    padding:26px 0;
+    text-align:center;
+  }
+
+  @media print{
+    header{position:static;}
+    .card,.step,.rank,.about,.hero{page-break-inside:avoid;}
+  }
+  @media (max-width:760px){    .wrap{padding:0 22px;}
+    .strip .wrap{grid-template-columns:1fr;gap:20px;}
+    .programs-grid{grid-template-columns:1fr;}
+    .steps{grid-template-columns:1fr;gap:24px;}
+    .rank-row{grid-template-columns:repeat(5,1fr);}
+    .rank{padding:16px 6px;}
+    .rank .letter{font-size:24px;}
+    .about{grid-template-columns:1fr;}
+    .contact-grid{grid-template-columns:1fr;}
+    .hero h1{font-size:32px;}
+    .hero-aleph{font-size:280px;}
+    .navlinks{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="logo"><span class="aleph">א</span> Aleph Dojo</div>
+    <nav class="navlinks">
+      <a href="#programs">Programs</a>
+      <a href="#ranks">The Path</a>
+      <a href="#synagogues">For synagogues</a>
+      <a href="#about">About Gili</a>
+    </nav>
+    <a class="navcta" href="#contact">Bring this to your shul</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-aleph">א</div>
+  <div class="wrap hero-inner">
+    <p class="eyebrow">Torah · Hebrew &amp; Aramaic · Movement</p>
+    <h1>Study the letter.<br>Master the stance.<br><span>Become who you're learning about.</span></h1>
+    <p>Aleph Dojo brings text study and martial discipline into one practice — built for synagogues, day schools, and families across NYC who want their kids and adults engaging with Torah in a way that moves.</p>
+    <div class="hero-ctas">
+      <a class="btn-gold" href="#contact">Bring this to your synagogue</a>
+      <a class="btn-outline" href="#programs">See the programs</a>
+    </div>
+  </div>
+</section>
+
+<div class="strip">
+  <div class="wrap">
+    <div class="strip-item">
+      <h3>Text</h3>
+      <p>Hebrew and Aramaic reading, taught the way a language is actually learned — out loud, in groups, with repetition.</p>
+    </div>
+    <div class="strip-item">
+      <h3>Body</h3>
+      <p>Foundational martial arts — stance, breath, discipline — taught as a physical practice, not a performance.</p>
+    </div>
+    <div class="strip-item">
+      <h3>Spirit</h3>
+      <p>Every session ties the two together: the text you studied is the thing your body just practiced holding onto.</p>
+    </div>
+  </div>
+</div>
+
+<section class="ranks" id="ranks">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">The path</p>
+      <h2>No belts. Letters.</h2>
+      <p>Instead of colored belts, students move through the Aleph-Bet itself — each letter is a stage of the program, tying language fluency and physical discipline to the same ladder.</p>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="rank-row">
+      <div class="rank">
+        <div class="letter">א</div>
+        <div class="stage">Aleph</div>
+        <div class="desc">Foundations — first letters, first stances</div>
+      </div>
+      <div class="rank">
+        <div class="letter">ב</div>
+        <div class="stage">Bet</div>
+        <div class="desc">Building — simple words, basic forms</div>
+      </div>
+      <div class="rank">
+        <div class="letter">ג</div>
+        <div class="stage">Gimel</div>
+        <div class="desc">Discipline — reading fluency, sparring basics</div>
+      </div>
+      <div class="rank">
+        <div class="letter">ד</div>
+        <div class="stage">Dalet</div>
+        <div class="desc">Depth — Aramaic introduced, advanced technique</div>
+      </div>
+      <div class="rank">
+        <div class="letter">ה</div>
+        <div class="stage">Hey</div>
+        <div class="desc">Mastery — teaching others, both disciplines</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="programs">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Programs</p>
+      <h2>One practice, a few ways to start</h2>
+      <p>Every track pairs language study with movement — the mix shifts by age group and setting.</p>
+    </div>
+    <div class="programs-grid">
+      <div class="card">
+        <span class="tag">Kids · ages 7–13</span>
+        <h3>Aleph-Bet &amp; Movement</h3>
+        <p>A Sunday-school-friendly hour: Hebrew letters and first words, paired with basic martial arts stances and games. Built to run alongside existing religious school schedules.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Teens</span>
+        <h3>Guardians of Shabbat</h3>
+        <p>A weekly teen track — text study moves into Aramaic and harder source material, movement moves into real technique and discipline. Built for kids who've outgrown Sunday school energy.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Adults</span>
+        <h3>Text &amp; Technique</h3>
+        <p>An evening adult class for people who never learned to read Hebrew fluently and want a physical outlet at the same time. No martial arts background required.</p>
+      </div>
+      <div class="card">
+        <span class="tag">Families</span>
+        <h3>Sunday Family Sessions</h3>
+        <p>A drop-in family morning — parents and kids learn and move side by side. Designed as a synagogue community-building event as much as a class.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="howitworks" id="synagogues">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">For synagogues &amp; day schools</p>
+      <h2>How a partnership actually starts</h2>
+      <p>This is meant to sit inside your existing programming, not compete with it.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="num">1</div>
+        <h3>A conversation</h3>
+        <p>Gili meets with clergy or education staff to understand your community, your space, and your calendar.</p>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <h3>A pilot session</h3>
+        <p>One free trial class, on-site, so families and leadership can see the format before committing to anything.</p>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <h3>A running program</h3>
+        <p>A regular weekly or monthly slot, priced and scheduled around what actually works for your building.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap about">
+    <div class="about-photo"><img src="assets/gili.png" alt="Gili" style="width:100%;height:100%;object-fit:cover;"></div>
+    <div class="about-text">
+      <span class="role">Founder</span>
+      <h2>Led by Gili</h2>
+      <p>Gili has spent years hosting free Shabbat dinners and building community across NYC through One Table Shabbat, and he's known across the city for showing up for people. Aleph Dojo is his next chapter — bringing the same hands-on, communal spirit to Torah study and movement.</p>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Get started</p>
+      <h2>Bring Aleph Dojo to your community</h2>
+    </div>
+    <div class="contact-grid">
+      <div>
+        <div class="audience-toggle">
+          <span class="active">Synagogue / school</span>
+          <span>Family</span>
+        </div>
+        <form action="mailto:Hello@VPforBiz.com" method="post" enctype="text/plain">
+          <input type="text" name="Name" placeholder="Your name">
+          <input type="text" name="Organization" placeholder="Synagogue or organization">
+          <input type="email" name="Email" placeholder="Email">
+          <input type="tel" name="Phone" placeholder="Phone">
+          <textarea name="Message" placeholder="Tell us about your community and what you're looking for"></textarea>
+          <button class="submit" type="submit">Request a pilot session</button>
+        </form>
+      </div>
+      <div class="contact-side">
+        <div class="line"><b>Serving</b> NYC synagogues, day schools &amp; families</div>
+        <div class="line"><b>Founder</b> Gili · 929-430-8399</div>
+        <div class="line"><b>Inquiries to</b> Hello@VPforBiz.com</div>
+        <div class="line"><b>Built by</b> VPforBiz</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Aleph Dojo &nbsp;·&nbsp; 929-430-8399
+</footer>
+
+</body>
+</html>
